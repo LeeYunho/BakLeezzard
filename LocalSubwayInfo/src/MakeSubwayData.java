@@ -118,7 +118,82 @@ public class MakeSubwayData
 		}
 	}
 	
+	/**
+	 * 역정보
+	 */
 	
+	private static void getStationInfo(){
+		String StationURL = String
+				.format("http://traffic.map.naver.com/Subway/StationInfo_Detail.asp?CID=%s&TMenu=2&LMenu=1&LID=%s&SID=%s", strCID, strLID, strSID);
+		String StationPagedata = DownloadHtml(StationURL).trim();
+		
+		String StationInfoPatternCompile = String
+				.format("<area shape=\"rect\" (.+) href=\"javascript:StationInfo\\(%s,%s,%s\\)\" title=\"(.+)\" />", strCID, strLID, strSID);
+		
+		Pattern StationPattern = Pattern.compile(StationInfoPatternCompile);
+		Matcher StationPatternMatches = StationPattern.matcher(StationPagedata);
+		
+		if ( StationPatternMatches.find()) {
+			strStationName = StationPatternMatches.group(2);
+
+			// naver 역정보 보정 <-> 죽전 오류
+			if (strSID.compareTo("1533") == 0
+					&& strStationName.compareTo("죽전(단국대)") == 0)
+				strStationName = "보정";
+
+			else if (strSID.compareTo("1534") == 0
+					&& strStationName.compareTo("보정") == 0)
+				strStationName = "죽전(단국대)";			
+		}
+		
+		//이전역 / 다음역
+		StationPattern = Pattern
+				.compile("<td width=\"85\"(.+)>(.+)</td>(\\s+)(.+)(\\s+)<td width=\"70\"(.+)>(.+)</td>(\\s+)(.+)(\\s+)<td width=\"85\"(.+)>(.+)</td>");
+		StationPatternMatches = StationPattern.matcher(StationPagedata);
+		
+		while (StationPatternMatches.find()) {
+			// 마곡나루역 미개통 처리.
+			if (Integer.parseInt(strSID) == 905) {
+				continue;
+			}		
+		
+			String strPre = StationPatternMatches.group(1);
+			String strNext = StationPatternMatches.group(11);
+			
+			Pattern stationNamePattern = Pattern
+					.compile("(.+)>(.+)</a>/<a (.+)");
+			Matcher stationNameMatches = stationNamePattern.matcher(strNext);
+			
+			if (stationNameMatches.find()) {
+				strpreStation = stationNameMatches.group(2).trim() + ",";			
+			}
+		
+			stationNameMatches = stationNamePattern.matcher(strPre);
+		
+			if (stationNameMatches.find()) {
+				strnextStation = stationNameMatches.group(2).trim() + ",";
+			}
+		
+			strpreStation += StationPatternMatches.group(2).replace("</a>","");
+			strnextStation += StationPatternMatches.group(12).replace("</a>","");
+			// 2호선 성수역
+			if (Integer.parseInt(strSID) == 211) {
+				strpreStation = "뚝섬, 용답";
+				strnextStation = "건대입구";
+			}
+
+			// 2호선 성수역 지선
+			// 네이버에서 2호선 성수역 지선역은 이전역과 다음역이 반대로 되어있다.
+			if (Integer.parseInt(strSID) >= 251
+					&& Integer.parseInt(strSID) <= 254) {
+				String strTemp;
+
+				strTemp = strpreStation;
+				strpreStation = strnextStation;
+				strnextStation = strTemp;
+			}
+		}
+	}
 	
 	// HTML Url을 인자로 받아 HTML 내용을 리턴하는 함수
 	public static String DownloadHtml(String strURL)
