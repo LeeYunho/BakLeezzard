@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="C:\Users\Administrator\BakLeezzard" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="0" key="org.eclipse.jdt.ui.last.selected.jre.kind2"/>
+	<section name="OptionalMessageDialog.hide.">
+		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
+	</section>
+	<section name="quick_assist_proposal_size">
+	</section>
+</section>
