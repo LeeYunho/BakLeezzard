@@ -146,7 +146,7 @@ public class MakeSubwayData
 				strStationName = "죽전(단국대)";			
 		}
 		
-		//이전역 / 다음역
+		//Get 이전역(PreStation) / 다음역(NextStation)
 		StationPattern = Pattern
 				.compile("<td width=\"85\"(.+)>(.+)</td>(\\s+)(.+)(\\s+)<td width=\"70\"(.+)>(.+)</td>(\\s+)(.+)(\\s+)<td width=\"85\"(.+)>(.+)</td>");
 		StationPatternMatches = StationPattern.matcher(StationPagedata);
