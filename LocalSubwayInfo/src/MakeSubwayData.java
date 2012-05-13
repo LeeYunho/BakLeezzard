@@ -2,11 +2,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 
@@ -56,6 +59,36 @@ public class MakeSubwayData
 				strStationInfo = "";
 				strStationTime = "";
 				
+				//Get CID,LID,SID
+				String URL = String.format("http://traffic.map.naver.com/Subway/Pop_Subway.asp?CID=%s&SEFlag=1&SearchName=", strCID) + URLEncoder.encode(strStationName, "EUC-KR");
+				String data = DownloadHtml(URL);
+				
+				Pattern StationPattern = Pattern.compile("javascript:SenData\\((.+),(.+),(.+),'(.+)'\\)(.+)(\\s+)(.+)>(.+)</td>");
+				Matcher StationMatches = StationPattern.matcher(data);
+				
+				if (StationMatches.find()) {
+					do {
+						String strLine = StationMatches.group(8).trim();
+						String strName = StationMatches.group(4).trim().replace("'","");
+						int nIndex = strName.indexOf('(');
+						
+						if (nIndex >0) {
+							strName = strName.substring(0, nIndex);
+						}
+						
+						// 수집 역명, 호선과 일치하면 수집, 아니면 다음 조회 결과로 넘어감.
+						if (strLine.compareTo(strStationLine)==0 && strName.compareTo(strStationName)==0) {
+							strCID = StationMatches.group(1).trim(); // 지역코드
+							strSID = StationMatches.group(2).trim(); // 지역코드
+							strLID = StationMatches.group(3).trim(); // 지역코드
+							break;
+						} else
+							continue;
+					} while ( StationMatches.find());
+				}else {
+					continue;
+				}
+				
 				// DB 추가
 				prep.setString(1, strStationName);
 				prep.setString(2, strStationLine);
@@ -84,6 +117,8 @@ public class MakeSubwayData
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	// HTML Url을 인자로 받아 HTML 내용을 리턴하는 함수
 	public static String DownloadHtml(String strURL)
@@ -127,4 +162,7 @@ public class MakeSubwayData
 		}
 		return html.toString();
 	}
+	
+
+
 }
