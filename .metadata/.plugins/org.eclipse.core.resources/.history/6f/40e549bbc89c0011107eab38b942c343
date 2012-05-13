@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+
 public class MakeSubwayData
 {
 	static String strCID; // 지역코드
@@ -134,10 +136,12 @@ public class MakeSubwayData
 			strStationName = StationPatternMatches.group(2);
 
 			// naver 역정보 보정 <-> 죽전 오류
-			if (strSID.compareTo("1533") == 0 && strStationName.compareTo("죽전(단국대)") == 0)
+			if (strSID.compareTo("1533") == 0
+					&& strStationName.compareTo("죽전(단국대)") == 0)
 				strStationName = "보정";
 
-			else if (strSID.compareTo("1534") == 0 && strStationName.compareTo("보정") == 0)
+			else if (strSID.compareTo("1534") == 0
+					&& strStationName.compareTo("보정") == 0)
 				strStationName = "죽전(단국대)";			
 		}
 		

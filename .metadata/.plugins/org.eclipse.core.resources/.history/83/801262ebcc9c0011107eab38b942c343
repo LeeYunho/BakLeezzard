@@ -186,28 +186,7 @@ public class MakeSubwayData
 			}
 		}
 	
-		// 역정보 - 주소, 전화번호
-		StationPattern = Pattern.compile("<td width=\"500\" class=\"gray01\">(.+)</td>");
-		StationPatternMatches = StationPattern.matcher(StationPagedata);
-
-		String strAddress = "";
-		String strTel = "";
-		while (StationPatternMatches.find())
-		{
-			String strTemp1 = StationPatternMatches.group(0).trim();
-
-			if (strTemp1.contains("주소"))
-			{
-				strAddress = StationPatternMatches.group(1).trim().replace("<b>", "").replace("</b>", "");
-			}
-
-			if (strTemp1.contains("전화번호")) 
-			{
-				strTel = StationPatternMatches.group(1).trim().replace("<b>", "").replace("</b>", "");
-			}
-		}
-
-		strStationInfo = strAddress + "\n" + strTel;
+		
 		
 	}
 	
