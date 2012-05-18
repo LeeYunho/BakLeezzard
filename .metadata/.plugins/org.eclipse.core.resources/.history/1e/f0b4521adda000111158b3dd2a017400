@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -61,7 +60,6 @@ public class MakeSubwayData
 				// strCID = stationlist.get(i).getStrCID();
 				strCID = "1000"; // 수도권이므로 1000으로 고정
 				strStationName = stationlist.get(i).getStrName();
-				strStationLine = CommonFunction.getStationLine(stationlist.get(i).getStrLine());
 				
 				
 				//Get CID,LID,SID
@@ -94,41 +92,28 @@ public class MakeSubwayData
 					continue;
 				}
 				
-				// 역 정보				 
-				getStationInfo();
-
-				
-				// 첫차, 막차 스케줄
-				getScheduleInfo();
-
-				// 모바일서울 URL
-				getMobileSeoulURL();
-				
 				// DB 추가
 				prep.setString(1, strStationName);
 				prep.setString(2, strStationLine);
-				prep.setString(3, strCID);
-				prep.setString(4, strStationURL);
-				prep.setString(5, strpreStation);
-				prep.setString(6, strnextStation);
-				prep.setString(8, strStationInfo);
-				prep.setString(9, strStationTime);
+				prep.setString(3, strStationURL);
+				prep.setString(4, strpreStation);
+				prep.setString(5, strnextStation);
+				prep.setString(6, strStationInfo);
+				prep.setString(8, strStationTime);
 				
 				prep.addBatch();
 				
 				// 데이터가 잘 수집되었는지 확인하기 위한 로그
 				String strLog = String.format("%s, %s, %s, %s, %s, %s", strStationName, strStationLine, strStationURL, strpreStation, strnextStation, strStationInfo);
 				System.out.println(strLog);
-			}
+			} // DB와 연결이 끊어지지 않았다면 데이터를 삽입
 			
-			// DB와 연결이 끊어지지 않았다면 데이터 삽입.
 			if(conn != null)
 			{
 				conn.setAutoCommit(false);
 				prep.executeBatch();
 				conn.setAutoCommit(true);
 			}
-			
 		}
 		catch(Exception e)
 		{
@@ -459,115 +444,6 @@ public class MakeSubwayData
 		strStationTime += "<평일>\n" + strTimeWorkdayFirst + "//" 	+ strTimeWorkdayLast + "/>\n" + "<토요일>\n" + strTimeSaturdayFirst + "//" + strTimeSaturdayLast + "/>\n"	+ "<공휴일>\n" + strTimeSundayFirst + "//" + strTimeSundayLast 	+ "/>\n";
 	}
 	
-	
-	/**
-	 * 모바일서울 URL
-	 */
-	private static void getMobileSeoulURL()
-	{
-		// TODO Auto-generated method stub
-
-		String strURL = "";
-		String strPagedata;
-		String strTempStationName = "";
-
-		// 총신대입구(이수)의 경우가 있을 수 있다.
-		Pattern pattern = Pattern.compile("(.+)\\((.+)\\)");
-		Matcher matches = pattern.matcher(strStationName);
-
-		if (matches.find()) 
-		{
-			strTempStationName = matches.group(1);
-		}
-		else
-		{
-			strTempStationName = strStationName;
-		}
-
-		// '서울역'의 경우 '서울' 로 검색한다.
-		int nIndex = strStationName.lastIndexOf("역");
-
-		if (nIndex == strStationName.length() - 1) 
-		{
-			strTempStationName = strStationName.substring(0, nIndex);
-		}
-		else if (strStationName.indexOf(" ") > 0) 
-		{
-			// 역명에 공백이 있으면 제거.
-			strTempStationName = strStationName.replace(" ", "");
-		}
-
-		try
-		{
-			strURL = "http://m.seoul.go.kr/traffic/SubInfoSearchList.do?subSearch="	+ URLEncoder.encode(strTempStationName, "EUC-KR") + "&flag=4";
-		}
-		catch (UnsupportedEncodingException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		strPagedata = DownloadHtml(strURL);
-
-		Pattern URLPattern = Pattern.compile("<a href=\"(.+)\" class=\"lst_a\"><div class=\"(.+)\">(.+)</div></a>");
-		Matcher URLPatternMatches = URLPattern.matcher(strPagedata);
-
-		while (URLPatternMatches.find())
-		{
-			String strTempLine = CommonFunction.getStrStationLine(URLPatternMatches.group(2));
-			String strTempName = URLPatternMatches.group(3);
-			String strName2 = "";
-
-			pattern = Pattern.compile("(.+) (.+)");
-			matches = pattern.matcher(strTempName);
-
-			while (matches.find()) 
-			{
-				strTempName = matches.group(2);
-
-				if (strTempName.length() != strTempStationName.length()) 
-				{
-
-					// 총신대입구(이수)의 경우가 있을 수 있다.
-					Pattern namePattern = Pattern.compile("(.+)\\((.+)\\)");
-					Matcher nameMatches = namePattern.matcher(strTempName);
-
-					if (nameMatches.find()) 
-					{
-						strTempName = nameMatches.group(1);
-						strName2 = nameMatches.group(2);
-					}
-					else
-					{
-						namePattern = Pattern.compile("(.+) (.+)");
-						nameMatches = namePattern.matcher(strTempName);
-
-						if (nameMatches.find()) 
-						{
-							strTempName = nameMatches.group(1);
-						}
-					}
-				}
-			}
-
-			String strTempStationLine = strStationLine;
-
-			// 역명과 호선이 일치 할 경우만 URL을 저장한다.
-			if (strTempStationLine.compareTo(strTempLine) == 0 && strTempStationName.compareTo(strTempName) == 0) {
-				strStationURL = URLPatternMatches.group(1).replace("&amp;", "&");
-				break;
-			}
-			else if (strTempStationLine.compareTo(strTempLine) == 0 && strTempStationName.compareTo(strName2) == 0) 
-			{
-				strStationURL = URLPatternMatches.group(1).replace("&amp;", "&");
-				break;
-			} 
-			else
-			{
-				continue;
-			}
-		}
-	}
 	
 	
 	// HTML Url을 인자로 받아 HTML 내용을 리턴하는 함수

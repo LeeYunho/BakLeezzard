@@ -94,16 +94,6 @@ public class MakeSubwayData
 					continue;
 				}
 				
-				// 역 정보				 
-				getStationInfo();
-
-				
-				// 첫차, 막차 스케줄
-				getScheduleInfo();
-
-				// 모바일서울 URL
-				getMobileSeoulURL();
-				
 				// DB 추가
 				prep.setString(1, strStationName);
 				prep.setString(2, strStationLine);
