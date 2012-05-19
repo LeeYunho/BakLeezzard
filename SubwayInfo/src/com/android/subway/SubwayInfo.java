@@ -12,6 +12,7 @@ import android.os.Environment;
 
 public class SubwayInfo extends Activity {
 
+	//Station List
 	static final String[] STATION = new String[] { "가능", "가산디지털단지", "간석", "개봉",
 		"관악", "광명", "구로", "구일", "군포", "금정", "금천구청", "남영", "노량진", "녹양",
 		"녹천", "당정", "대방", "덕계", "덕정", "도봉", "도봉산", "도원", "도화", "독산", "동대문",
@@ -62,7 +63,8 @@ public class SubwayInfo extends Activity {
 		"가평", "갈매", "강촌", "굴봉산", "금곡", "김유정", "남춘천", "대성리", "마석", "백양리",
 		"사릉", "상천", "청평", "춘천", "퇴계원", "평내호평" };
 	
-	
+
+	//DB Copy
 	public void docopy() {
 		File outDir = null;
 		File outfile = null;
