@@ -117,8 +117,47 @@ public class SubwayInfo extends Activity {
 	
 	/** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        txtViewStationName = (AutoCompleteTextView)findViewById(R.id.txtViewStationName);
+        btnSearch = (Button)this.findViewById(R.id.btnline);
+        
+        ctx = this;
+        preferences = getPreferences(MODE_WORLD_WRITEABLE);
+        strVersion = preferences.getString("VERSION", "");
+        
+        // SharePreferences에 저장된 버전과 app 버전이 다를 때 DB 파일 외장메모리로 복사
+        if(getString(R.string.appversion).compareTo(strVersion) != 0)
+        {
+        	if(Environment.getExternalStoragesState().equals(Environment.MEDIA_MOUNTED)) //외장메모리가 사용 가능할 때
+        	{
+        		Update();
+        	}
+        	else
+        	{
+        		showDialog(IConstant.DIALOG_NOSDCARD);
+        	}
+        }
+        
+        registerForContextMenu(getListView()); // 컨텍스트 메뉴 등록
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    protected void onResume()
+    {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+    	
+    	// 자동완성 텍스트뷰 구현
+    	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, STATION);
+    	txtViewStationName.setAdapter(adapter);
+    	txtViewStationName.setText("");
+    	
+    	// 최근 검색역 리스트 조회
+    	makeRecentStation();
     }
 }

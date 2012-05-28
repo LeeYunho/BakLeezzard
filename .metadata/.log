@@ -3189,3 +3189,32 @@ org.eclipse.core.internal.resources.ResourceException: Invalid project descripti
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
 Contains: OK
 Contains: C:\Users\Administrator\BakLeezzard\SubwayInfoTest overlaps the location of another project: 'SubwayInfoTest'
+!SESSION 2012-05-20 22:42:13.782 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_32
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-05-20 22:42:21.142
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test
+!SESSION 2012-05-29 01:35:01.083 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_32
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-05-29 01:35:26.966
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test
+
+!ENTRY org.eclipse.epp.usagedata.recording 1 0 2012-05-29 01:36:24.069
+!MESSAGE Usage data uploaded to http://udc.eclipse.org/upload.php in 3921 milliseconds.
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2012-05-29 01:38:56.813
+!MESSAGE main.xml: You must supply a layout_height attribute.
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2012-05-29 01:38:56.825
+!MESSAGE main.xml: You must supply a layout_height attribute.
