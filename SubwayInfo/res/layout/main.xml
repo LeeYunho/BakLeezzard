@@ -39,8 +39,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         andorid:id="@android:id/empty"
-        android:layout_weight="1"
-        android:text="최근 검색 목록이 없습니다.">        
+        android:layout_weight="1">        
     </TextView>
 
 </LinearLayout>
