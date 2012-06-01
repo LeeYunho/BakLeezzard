@@ -156,6 +156,5 @@ public class SubwayInfo extends Activity {
     	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, STATION);
     	txtViewStationName.setAdapter(adapter);
     	txtViewStationName.setText("");
-    	
     }
 }
