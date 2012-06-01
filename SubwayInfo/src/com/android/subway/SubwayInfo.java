@@ -156,8 +156,5 @@ public class SubwayInfo extends Activity {
     	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, STATION);
     	txtViewStationName.setAdapter(adapter);
     	txtViewStationName.setText("");
-    	
-    	// 최근 검색역 리스트 조회
-    	makeRecentStation();
     }
 }

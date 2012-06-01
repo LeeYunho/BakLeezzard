@@ -3218,3 +3218,13 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY com.android.ide.eclipse.adt 2 0 2012-05-29 01:38:56.825
 !MESSAGE main.xml: You must supply a layout_height attribute.
+!SESSION 2012-06-02 01:32:53.413 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_32
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-02 01:33:22.345
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test
