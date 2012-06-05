@@ -157,7 +157,5 @@ public class SubwayInfo extends Activity {
     	txtViewStationName.setAdapter(adapter);
     	txtViewStationName.setText("");
     	
-    	// 최근 검색역 리스트 조회
-    	makeRecentStation();
     }
 }
