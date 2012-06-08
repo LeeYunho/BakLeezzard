@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent">
+	<!-- 화면보다 데이터가 길어질 수 있으므로 ScrollView로 만든다. -->	
+	<ScrollView
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:scrollbarStyle="outsideInset">
+		<!-- 데이터 부분은 TableLayout으로 구현 -->
+		<TableLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:stretchColumns="*"
+		    android:paddingRight="1dip">
+		    <TableRow>
+		    	<!-- 이전역-->
+				<TextView 
+					android:layout_column="0"
+					android:id="@+id/TextPreStation"
+					android:textSize="20sp"
+					android:gravity="left"
+					android:clickable="true">
+				</TextView>
+			
+				<!-- 다음역-->
+				<TextView
+					android:id="@+id/TextNextStation"
+					android:textSize="20sp"
+					android:gravity="right"
+					android:clickable="true">
+				</TextView>
+			</TableRow>
+			
+			<!-- 역명 -->
+			<TableRow>
+				<TextView 
+					android:layout_weight="1"
+					android:layout_span="2"
+					android:id="@+id/TextStationName"
+					android:textSize="25sp"
+					android:gravity="center">
+				</TextView>
+			</TableRow>
+			
+			<!-- 첫차시간 -->
+			<TableRow>
+				<TextView 
+					android:layout_column="0"
+					android:id="@+id/TextFirstBackSchedule" 
+					android:gravity="left">
+				</TextView>
+				<TextView 
+					android:id="@+id/TextFirstForSchedule" 
+					android:gravity="right"
+					android:paddingRight="1dp">
+				</TextView>
+			</TableRow>
+			
+			<!-- 막차시간 -->
+			<TableRow>
+				<TextView 
+					android:layout_column="0"
+					android:id="@+id/TextLastBackSchedule" 
+					android:gravity="left">
+				</TextView>
+				<TextView 
+					android:id="@+id/TextLastForSchedule" 
+					android:gravity="right"
+					android:paddingRight="1dp">
+				</TextView>
+			</TableRow>
+			<View
+				android:layout_height="2dip"
+				android:background="#FF909090"/>
+			
+			<!-- 도착예정정보 행선지 -->
+			<TableRow>
+				<TextView 
+					android:layout_column="0"
+					android:id="@+id/TextBackSchedule" 
+					android:textSize="15sp"
+					android:gravity="center">
+				</TextView>
+				<TextView 
+					android:id="@+id/TextForSchedule"
+					android:textSize="15sp" 
+					android:gravity="center"
+					android:paddingRight="1dp">
+				</TextView>
+			</TableRow>
+			
+			<!-- 도착예정정보 도착시간 -->
+			<TableRow>
+				<RelativeLayout
+					android:layout_column="0"
+					android:layout_width="fill_parent"
+		    			android:layout_height="fill_parent"
+		    			android:gravity="center">
+					<TextView
+						android:gravity="center" 
+						android:id="@+id/TextBackScheduleTime"
+						android:textSize="35sp"
+						android:textColor="#FFFF0000" 
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentLeft="true">
+					</TextView>
+				 	<TextView
+						android:id="@+id/TextBackScheduleText"
+						android:textSize="20sp"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_toRightOf="@id/TextBackScheduleTime"
+						android:layout_alignBaseline="@id/TextBackScheduleTime"
+						android:paddingRight="1dp">
+					</TextView>
+				</RelativeLayout>
+				<RelativeLayout
+					android:layout_width="fill_parent"
+		    		android:layout_height="fill_parent"
+		    		android:gravity="center">
+					<TextView 
+						android:gravity="center"
+						android:id="@+id/TextForScheduleTime"
+						android:textSize="35sp"
+						android:textColor="#FFFF0000"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentLeft="true">
+					</TextView>
+				 	<TextView
+						android:id="@+id/TextForScheduleText"
+						android:textSize="20sp"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_toRightOf="@id/TextForScheduleTime"
+						android:layout_alignBaseline="@id/TextForScheduleTime"
+						android:paddingRight="1dp">
+					</TextView> 
+				</RelativeLayout>
+			</TableRow>
+			<View
+				android:layout_height="2dip"
+				android:background="#FF909090"/> 
+			
+			<!-- 도착예정정보1 - 행선지 -->
+			<TableRow>
+				<TextView 
+					android:layout_column="0"
+					android:id="@+id/TextBack1" 
+					android:textSize="15sp"
+					android:gravity="left">
+				</TextView>
+				<TextView 
+					android:id="@+id/TextFor1"
+					android:textSize="15sp"
+					android:gravity="right"
+					android:paddingRight="1dp">
+				</TextView>
+			</TableRow>
+	
+			<View
+				android:layout_height = "1dip"
+				android:background = "#FF909090"/>
+	
+			<!-- 도착예정정보2 - 행선지 -->  
+			<TableRow>
+				<TextView 
+					android:layout_column="0"
+					android:id="@+id/TextBack2"
+					android:textSize = "15sp" 
+					android:gravity="left">
+				</TextView>
+				<TextView 
+					android:id="@+id/TextFor2" 
+					android:textSize = "15sp"
+					android:gravity="right"
+					android:paddingRight = "1dp">
+				</TextView>
+			</TableRow>
+	 
+			<View
+				android:layout_height = "1dip"
+				android:background = "#FF909090"/>
+
+			<!-- 첫차 막차 시간표-->
+			<TableRow>
+				<TextView
+					style="?android:attr/listSeparatorTextViewStyle"
+					android:id="@+id/firstlasttime"
+					android:text="첫차/막차 시간표"
+					android:layout_span="2"
+					android:gravity="center"
+					android:layout_marginTop="2dip"
+					android:layout_marginBottom="2dip">
+				</TextView>
+			</TableRow>
+			<TableRow
+				android:id="@+id/firstlasttimedetail"
+				android:visibility="gone">
+				<LinearLayout
+					android:layout_span="2"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+					<TextView
+						android:layout_weight="1"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:id="@+id/firstlasttimedetail1">
+					</TextView>
+					<TextView
+						android:layout_weight="1"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:id="@+id/firstlasttimedetail2">
+					</TextView>
+				</LinearLayout>
+			</TableRow>
+		</TableLayout>
+	</ScrollView> 
+</LinearLayout>
