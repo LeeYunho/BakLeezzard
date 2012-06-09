@@ -4150,3 +4150,16 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY com.android.ide.eclipse.adt 1 0 2012-06-10 01:47:43.162
 !MESSAGE No valid Android XML Editor Delegate found for file file:/C:/Users/박소영/Documents/네이트온%20받은%20파일/main.xml [Res 네이트온%20받은%20파일, type null]
+!SESSION 2012-06-10 02:34:22.158 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_32
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2012-06-10 02:34:24.677
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 02:34:27.496
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -27,11 +26,11 @@ public class Tab3_StationInfo extends Activity {
 		
 		//전화번호 클릭시 Dial Intent 실행
 		TextViewTel.setOnClickListener(new OnClickListener() {
-			//@Override
-			public void inClick(View v) {
+			@Override
+			public void onClick(View v) {
 				Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri
 						.parse("tel:" + TextViewTel.getText()));
-				dialIntent.setFlags(Intent,FLAG_ACTIVITY_NEW_TASK);
+				dialIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(dialIntent);
 			}
 		});
@@ -51,7 +50,7 @@ public class Tab3_StationInfo extends Activity {
 		
 		//초기화
 		TextViewAddress.setText("");
-		TextViewTel.setTest("");
+		TextViewTel.setText("");
 		
 		if (strStationInfo.compareTo("") != 0) {
 			//주소
@@ -60,7 +59,7 @@ public class Tab3_StationInfo extends Activity {
 					strStationInfo.indexOf("\n")).replace("주소 : ", "").trim();
 			//전화번호
 			String strTel = strStationInfo.substring(
-					strStationInfo.index.Of("전화번호 : ") + 7,
+					strStationInfo.indexOf("전화번호 : ") + 7,
 					strStationInfo.length()).replace("전화번호 : ", "").trim();
 			
 			TextViewAddress.setText(strAddress);
