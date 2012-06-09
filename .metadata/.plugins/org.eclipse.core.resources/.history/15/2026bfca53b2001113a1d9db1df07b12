@@ -27,7 +27,7 @@ public class Tab3_StationInfo extends Activity {
 		
 		//전화번호 클릭시 Dial Intent 실행
 		TextViewTel.setOnClickListener(new OnClickListener() {
-			//@Override
+			@Override
 			public void inClick(View v) {
 				Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri
 						.parse("tel:" + TextViewTel.getText()));

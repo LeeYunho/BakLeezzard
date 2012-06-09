@@ -4147,3 +4147,6 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY org.eclipse.ui 4 4 2012-06-10 00:29:43.636
 !MESSAGE Invalid preference page path: XML Syntax
+
+!ENTRY com.android.ide.eclipse.adt 1 0 2012-06-10 01:47:43.162
+!MESSAGE No valid Android XML Editor Delegate found for file file:/C:/Users/박소영/Documents/네이트온%20받은%20파일/main.xml [Res 네이트온%20받은%20파일, type null]

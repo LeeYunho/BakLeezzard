@@ -1,14 +1,13 @@
 package com.android.subway.ui;
 
-import android.app.TabActivity;
-
+import android.app.TapActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 
 import com.android.subway.R;
 
-public class Station extends TabActivity {
+public class Station extends TapActivity {
 
 	//station 화면 구성
 	@Override

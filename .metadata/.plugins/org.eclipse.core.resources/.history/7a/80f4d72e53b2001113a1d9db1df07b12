@@ -44,29 +44,29 @@ public class SubwayInfo extends ListActivity implements Runnable {
 
 	static private final String tag = "Android_Subway"
 
-			public static Activity ctx;
+			public static Activity ctx
 			ArrayList<StationInfo> arrStation = new ArrayList<StationInfo>();
-	StationInfo stationInfo;
-	Thread thread = null;
+	StationInfo stationInfo
+	Thread thread = null
 
-	private ProgressDialog progressDialog;
-	private Dialog dialog;
-	private Dialog Line_dialog;
-	public static String strDBname;
+	private ProgressDialog progressDialog
+	private Dialog dialog
+	private Dialog Line_dialog
+	public static String strDBname
 
-	String strCID = "1000";
-	StationAdapter mAdapter = null;
+	String strCID = "1000"
+	StationAdapter mAdapter = null
 	int mJobId = 0;
 	int mListId = 0;
 
-	private SharedPreferences preferences;
-	private static String strVersion;
+	private SharedPreferences preferences
+	private static String strVersion
 
-	boolean bSearch = false; // 검색 플래그
+	boolean bSearch = false // 검색 플래그
 
-	static AutoCompleteTextView txtViewStationName;
+	static AutoCompleteTextView txtViewStationName
 
-	static Display display;
+	static Display display
 	static final String[] STATION = new String[]
 	{
 		"가능", "가산디지털단지", "간석", "개봉",
@@ -200,7 +200,7 @@ public class SubwayInfo extends ListActivity implements Runnable {
         // SharePreferences에 저장된 버전과 app 버전이 다를 때 DB 파일 외장메모리로 복사
         if(getString(R.string.appversion).compareTo(strVersion) != 0)
         {
-        	if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) //외장메모리가 사용 가능할 때
+        	if(Environment.getExternalStoragesState().equals(Environment.MEDIA_MOUNTED)) //외장메모리가 사용 가능할 때
         	{
         		Update();
         	}
