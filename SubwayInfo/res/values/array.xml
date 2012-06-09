@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name = "local">
+		<item>수도권</item>
+	</string-array>	
+	<string-array name = "cid_1000">
+		<item>1호선</item>
+		<item>2호선</item>
+		<item>3호선</item>
+		<item>4호선</item>
+		<item>5호선</item>
+		<item>6호선</item>
+		<item>7호선</item>
+		<item>8호선</item>
+		<item>9호선</item>
+		<item>경의선</item>
+		<item>인천1호선</item>
+		<item>분당선</item>
+		<item>공항철도</item>
+		<item>중앙선</item>
+		<item>경춘선</item>				
+	</string-array>	
+	<string-array name = "cid_1000_lid">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>8</item>
+		<item>9</item>
+		<item>104</item>
+		<item>200</item>
+		<item>100</item>
+		<item>101</item>
+		<item>103</item>
+		<item>108</item>		
+	</string-array>
+</resources>

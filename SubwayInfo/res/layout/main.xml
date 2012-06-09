@@ -39,7 +39,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         andorid:id="@android:id/empty"
-        android:layout_weight="1">        
+        android:layout_weight="1"
+        android:text="">        
     </TextView>
 
 </LinearLayout>

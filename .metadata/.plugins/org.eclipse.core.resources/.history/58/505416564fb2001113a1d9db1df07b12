@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <!-- 역명조회 -->
+        <AutoCompleteTextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/txtViewStationNmae"
+            android:hint="역명을 입력하세요"
+            android:maxLines="1">            
+        </AutoCompleteTextView>
+        <!-- 검색버튼 -->
+        <Button
+            android:layout_height="fill_Parent"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btnSearch"
+            android:text="검색">
+        </Button>
+   
+    </LinearLayout>
+    <!-- 역 리스트 뷰 -->
+    <Listview
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="waro_content"
+        android:layout_weught="1"
+        android:transcriptMode="normal">
+    </Listview>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        andorid:id="@android:id/empty"
+        android:layout_weight="1">        
+    </TextView>
+
+</LinearLayout>

@@ -1,18 +1,72 @@
 package com.android.subway;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 
-public class SubwayInfo extends Activity {
+import com.android.subway.common.DBAdapter;
+import com.android.subway.common.LocalDBAdapter;
+import com.android.subway.common.StationAdapter;
+import com.android.subway.common.StationInfo;
+import com.android.subway.ui.Station;
 
-	//Station List
+public class SubwayInfo extends ListActivity implements Runnable {
+
+	static private final String tag = "Android_Subway"
+
+			public static Activity ctx
+			ArrayList<StationInfo> arrStation = new ArrayList<StationInfo>();
+	StationInfo stationInfo
+	Thread thread = null
+
+	private ProgressDialog progressDialog
+	private Dialog dialog
+	private Dialog Line_dialog
+	public static String strDBname
+
+	String strCID = "1000"
+	StationAdapter mAdapter = null
+	int mJobId = 0;
+	int mListId = 0;
+
+	private SharedPreferences preferences
+	private static String strVersion
+
+	boolean bSearch = false // 검색 플래그
+
+	static AutoCompleteTextView txtViewStationName
+
+	static Display display
 	static final String[] STATION = new String[]
 	{
 		"가능", "가산디지털단지", "간석", "개봉",
@@ -66,6 +120,21 @@ public class SubwayInfo extends Activity {
 		"사릉", "상천", "청평", "춘천", "퇴계원", "평내호평"
 	};
 	
+	public void Update() {
+		progressDialog = ProgressDialog.show(ctx, "Loading", getString(R.string.loading),
+		true, false);
+
+		thread = new Thread(this);
+
+		mJobId = IConstant.JOB_DBCOPY;
+
+		try {
+		thread.start();
+		} catch (IllegalStateException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		}
 
 	//DB Copy
 	public void docopy() {
@@ -123,7 +192,6 @@ public class SubwayInfo extends Activity {
         setContentView(R.layout.main);
         
         txtViewStationName = (AutoCompleteTextView)findViewById(R.id.txtViewStationName);
-        btnSearch = (Button)this.findViewById(R.id.btnline);
         
         ctx = this;
         preferences = getPreferences(MODE_WORLD_WRITEABLE);
@@ -141,7 +209,19 @@ public class SubwayInfo extends Activity {
         		showDialog(IConstant.DIALOG_NOSDCARD);
         	}
         }
-        
+     // 자동완성 리스트 선택 시 자동으로 해당 역 조회
+        txtViewStationName
+        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view,
+        int position, long id) {
+        // TODO Auto-generated method stub
+        String strStationName = (parent
+        .getItemAtPosition(position)).toString();
+        SearchButton(strStationName);
+        }
+        });
         registerForContextMenu(getListView()); // 컨텍스트 메뉴 등록
     }
     
@@ -156,6 +236,240 @@ public class SubwayInfo extends Activity {
     	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, STATION);
     	txtViewStationName.setAdapter(adapter);
     	txtViewStationName.setText("");
-    	
     }
-}
+
+    /**
+     * 리스트 아이템 클릭
+     */
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+    	// TODO Auto-generated method stub
+    	super.onListItemClick(l, v, position, id);
+
+    	//버튼 클릭 할 때 소프트 키보드가 없어지게..
+    	InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    	inputManager.hideSoftInputFromWindow(txtViewStationName
+    			.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+    	StationInfo stationInfo = (StationInfo) l.getItemAtPosition(position);
+    	String strStationName = stationInfo.getStationName();
+    	String strStationLine = stationInfo.getLine();
+
+    	Intent intent = new Intent(SubwayInfo.this, Station.class);
+
+    	intent.putExtra("StationName", strStationName);
+    	intent.putExtra("StationLine", strStationLine);
+    	intent.putExtra("StationLocal", strCID);
+
+    	startActivity(intent);
+    }
+
+    /**
+     * 리스트 롱클릭 컨텍스트 메뉴 //건들지말기
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+    		ContextMenuInfo menuInfo) {
+    	if (mListId == IConstant.LIST_FAVORITE) {
+    		super.onCreateContextMenu(menu, v, menuInfo);
+    		menu.setHeaderTitle(getString(R.string.delete_item));
+    		menu.add(0, IConstant.DELETE_ID, 2, R.string.menu_delete);
+    	}
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+    	// 개별삭제
+    	case IConstant.DELETE_ID:
+    		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+    		.getMenuInfo();
+    		final StationInfo station = arrStation.get((int) info.id);
+
+    		LocalDBAdapter.open(ctx);
+
+    		LocalDBAdapter.deleteItem(station.getStationName(), station
+    				.getLine()/*, station.getStationLocal()*/);
+
+    		LocalDBAdapter.close();
+    		makeRecentStation();
+  
+    		return true;
+    	}
+
+    	return super.onContextItemSelected(item);
+    }
+
+    /**
+     * 옵션메뉴
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	// TODO Auto-generated method stub
+    	getMenuInflater().inflate(R.menu.menu_main, menu);
+    	return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	// TODO Auto-generated method stub
+    	if (mListId == IConstant.LIST_LINE) {
+    		menu.getItem(0).setVisible(false);
+    	} else if (mListId == IConstant.LIST_FAVORITE) {
+    		menu.getItem(0).setVisible(true);
+    	}
+
+    	return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	// TODO Auto-generated method stub
+
+    	switch (item.getItemId()) {
+    	case R.id.exit:
+    		// 애플리케이션 종료
+    		finish();
+    		break;
+    	}
+
+    	return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 검색 버튼
+     * 
+     * @param strStationName
+     */
+    public void SearchButton(String strStationName) {
+    	bSearch = true;
+
+    			// 검색어가 없는 경우
+    			if ("".equals(strStationName)) {
+    				return;
+    			}
+
+    	// 검색어에서 "역" 제거
+    	if (strStationName.contains("역")) {
+    		strStationName.replace("역", "");
+    	}
+
+    	try {
+    		// DB Open
+    		DBAdapter.open();
+
+    		Log.e("com.android.subway", strStationName);
+
+    		// 역명, 지역으로 역 리스트 조회
+    		Cursor c = DBAdapter.selectStationToName(strStationName/*, strCID*/);
+
+    		// 리스트뷰에 채우기
+    		fillData(c);
+
+    		// 커서 닫기
+    		c.close();
+
+    		// DB Close
+    		DBAdapter.close();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	// AutoCompleteTextView 초기화
+    	txtViewStationName.setText("");
+    }
+
+ 
+    /**
+     * 최근 검색역 리스트 조회
+     */
+    public void makeRecentStation() {
+    	try {
+    		// LocalDB Open
+    		LocalDBAdapter.open(ctx);
+
+    		// 최근검색역 조회
+    		Cursor c = LocalDBAdapter.select();
+
+    		// 리스트 생성
+    		fillData(c);
+
+    		c.close();
+    		LocalDBAdapter.close();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+
+    /**
+     * 역 리스트 생성
+     */
+    private void fillData(Cursor c) {
+    	arrStation.clear();
+
+    	if (dialog != null) {
+    		if (dialog.isShowing()) {
+    			dialog.dismiss();
+    		}
+    	}
+
+    	if (Line_dialog != null) {
+    		if (Line_dialog.isShowing()) {
+    			Line_dialog.dismiss();
+    		}
+    	}
+    	
+    	while (c.moveToNext()) {
+    		String strStationLine = c.getString(1);
+    		String strStationName = c.getString(0);
+
+    		StationInfo stationInfo = new StationInfo(strStationLine,
+    				strStationName);
+    		arrStation.add(stationInfo);
+    	}
+
+    	// 어댑터를 생성합니다.
+    	mAdapter = new StationAdapter(this, R.layout.row, arrStation);
+    	setListAdapter(mAdapter);
+
+    	mListId = IConstant.LIST_FAVORITE;
+    	mAdapter.notifyDataSetChanged();
+
+    	c.close();
+    }
+
+    @Override
+    public void run() {
+    	// TODO Auto-generated method stub
+    	switch (mJobId) {
+    	case IConstant.JOB_DBCOPY:
+    		doCopy();
+    		handler.sendEmptyMessage(IConstant.JOB_DBCOPY);
+    		break;
+    	}
+    }
+
+    private Handler handler = new Handler() {
+
+    	@Override
+    	public void handleMessage(Message msg) {
+	  // TODO Auto-generated method stub
+    		switch (mJobId) {
+    		case IConstant.JOB_DBCOPY:
+    			if (progressDialog.isShowing()) {
+    				progressDialog.dismiss();
+    			}
+
+    			savePreferences();
+    			break;
+    		}
+    	}
+    };
+
+    /**
+     * 설정값 저장
+     */
+    private void savePreferences() {
+    	preferences.edit().putString("VERSION", getString(R.string.appversion)).commit();
+    }
+  	}

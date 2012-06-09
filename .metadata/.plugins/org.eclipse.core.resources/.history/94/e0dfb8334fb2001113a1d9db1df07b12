@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "cid_1000">
+        <item>1호선</item>
+        <item>2호선</item>
+        <item>3호선</item>
+        <item>4호선</item>
+        <item>5호선</item>
+        <item>6호선</item>
+        <item>7호선</item>
+        <item>8호선</item>
+        <item>9호선</item>
+        <item>경의선</item>
+        <item>인천1호선</item>
+        <item>분당선</item>
+        <item>공항철도</item>
+        <item>중앙선</item>
+        <item>경춘선</item>
+        </string-array>
+</resources>
