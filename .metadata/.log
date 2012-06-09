@@ -4176,3 +4176,54 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY com.android.ide.eclipse.adt 1 0 2012-06-10 02:54:50.856
 !MESSAGE No valid Android XML Editor Delegate found for file /SubwayInfo/AndroidManifest.out.xml [Res null, type null]
+!SESSION 2012-06-10 03:36:13.662 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 03:36:19.826
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project SubwayInfo
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 03:36:19.833
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 03:36:21.849
+!MESSAGE fileChanged: failed to find manifest package for project SubwayInfo
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 03:36:31.930
+!MESSAGE fileChanged: failed to find manifest package for project SubwayInfo
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 03:36:32.678
+!MESSAGE fileChanged: failed to find manifest package for project SubwayInfo
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 03:36:35.395
+!MESSAGE Unable to read C:\Users\박소영\BakLeezzard\SubwayInfo\AndroidManifest.xml: org.eclipse.core.internal.resources.ResourceException: Resource is out of sync with the file system: '/SubwayInfo/AndroidManifest.xml'.
+!STACK 0
+com.android.io.StreamException: org.eclipse.core.internal.resources.ResourceException: Resource is out of sync with the file system: '/SubwayInfo/AndroidManifest.xml'.
+	at com.android.ide.eclipse.adt.io.IFileWrapper.getContents(IFileWrapper.java:51)
+	at com.android.sdklib.xml.AndroidManifestParser.parse(AndroidManifestParser.java:607)
+	at com.android.ide.eclipse.adt.internal.project.AndroidManifestHelper.parse(AndroidManifestHelper.java:71)
+	at com.android.ide.eclipse.adt.internal.build.builders.PreCompilerBuilder.build(PreCompilerBuilder.java:367)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: org.eclipse.core.internal.resources.ResourceException: Resource is out of sync with the file system: '/SubwayInfo/AndroidManifest.xml'.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:793)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:289)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:278)
+	at com.android.ide.eclipse.adt.io.IFileWrapper.getContents(IFileWrapper.java:49)
+	... 15 more
+
+!ENTRY org.eclipse.ui 4 4 2012-06-10 03:36:47.658
+!MESSAGE Invalid preference page path: XML Syntax

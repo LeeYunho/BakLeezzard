@@ -35,14 +35,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 
 import com.android.subway.common.DBAdapter;
-//import com.android.subway.common.LocalDBAdapter;
+import com.android.subway.common.LocalDBAdapter;
 import com.android.subway.common.StationAdapter;
 import com.android.subway.common.StationInfo;
 import com.android.subway.ui.Station;
 
 public class SubwayInfo extends ListActivity implements Runnable {
 
-	static private final String tag = "Android_Subway"
+	static private final String tag = "Android_Subway";
 
 			public static Activity ctx;
 			ArrayList<StationInfo> arrStation = new ArrayList<StationInfo>();
@@ -327,7 +327,7 @@ public class SubwayInfo extends ListActivity implements Runnable {
     	// TODO Auto-generated method stub
 
     	switch (item.getItemId()) {
-    	case R.id.exit:
+    	case R.id.timetable:
     		// 애플리케이션 종료
     		finish();
     		break;
