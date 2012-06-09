@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"> 	
+	
+	<item 
+		android:title="지하철정보\n종료" 
+		android:id="@+id/exit" 
+		android:icon="@drawable/quit"
+		android:orderInCategory="2">
+	</item>
+</menu>

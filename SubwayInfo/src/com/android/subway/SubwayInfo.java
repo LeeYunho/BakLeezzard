@@ -137,7 +137,7 @@ public class SubwayInfo extends ListActivity implements Runnable {
 		}
 
 	//DB Copy
-	public void docopy() {
+	public void doCopy() {
 		File outDir = null;
 		File outfile = null;
 		// 외장메모리 사용 가능 상태인지 확인
@@ -327,7 +327,7 @@ public class SubwayInfo extends ListActivity implements Runnable {
     	// TODO Auto-generated method stub
 
     	switch (item.getItemId()) {
-    	case R.id.timetable:
+    	case R.id.exit:
     		// 애플리케이션 종료
     		finish();
     		break;

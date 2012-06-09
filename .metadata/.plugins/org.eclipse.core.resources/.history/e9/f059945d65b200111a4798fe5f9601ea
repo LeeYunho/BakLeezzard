@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"> 	
+	<item 
+		android:title="검색기록\n모두삭제" 
+		android:id="@+id/deleteall" 
+		android:icon="@drawable/delete"
+		android:orderInCategory="0">		
+	</item>
+	<item 
+		android:title="지하철정보\n종료" 
+		android:id="@+id/exit" 
+		android:icon="@drawable/quit"
+		android:orderInCategory="2">
+	</item>
+</menu>

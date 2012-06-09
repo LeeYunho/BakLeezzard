@@ -34,7 +34,7 @@ public class Station extends TabActivity {
 				.setContent(StationInfoIntent));
 		
 		tabHost.addTab(tabHost.newTabSpec("Timetable")
-				.setIndicator("시간표", getResources().getDrawable(R.drawable.timetable))
+				.setIndicator("시간표", getResources().getDrawable(R.drawable.exit))
 				.setContent(new Intent(Station.this, Tab2_TimetableInfo.class)));
 		
 		tabHost.addTab(tabHost.newTabSpec("StationInfo")
