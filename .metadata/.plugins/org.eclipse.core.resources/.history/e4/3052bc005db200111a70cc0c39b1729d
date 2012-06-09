@@ -35,7 +35,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 
 import com.android.subway.common.DBAdapter;
-//import com.android.subway.common.LocalDBAdapter;
+import com.android.subway.common.LocalDBAdapter;
 import com.android.subway.common.StationAdapter;
 import com.android.subway.common.StationInfo;
 import com.android.subway.ui.Station;

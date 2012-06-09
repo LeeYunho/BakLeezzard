@@ -4163,3 +4163,16 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 02:34:27.496
 !MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test
+!SESSION 2012-06-10 02:49:00.568 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.6.0_32
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-06-10 02:49:05.457
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project com_android_subway_test
+
+!ENTRY com.android.ide.eclipse.adt 1 0 2012-06-10 02:54:50.856
+!MESSAGE No valid Android XML Editor Delegate found for file /SubwayInfo/AndroidManifest.out.xml [Res null, type null]
