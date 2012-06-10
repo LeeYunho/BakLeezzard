@@ -27,13 +27,11 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.android.subway.common.DBAdapter;
@@ -67,8 +65,7 @@ public class SubwayInfo extends ListActivity implements Runnable {
 	boolean bSearch = false; // 검색 플래그
 
 	static AutoCompleteTextView txtViewStationName;
-	
-	static Button btnSearch;
+
 	static Display display;
 	static final String[] STATION = new String[]
 	{
@@ -193,8 +190,6 @@ public class SubwayInfo extends ListActivity implements Runnable {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        btnSearch = (Button) this.findViewById(R.id.btnSearch);
-		
         
         txtViewStationName = (AutoCompleteTextView)findViewById(R.id.txtViewStationName);
         
@@ -227,25 +222,6 @@ public class SubwayInfo extends ListActivity implements Runnable {
         SearchButton(strStationName);
         }
         });
-        
-     // 검색 버튼
-     		btnSearch.setOnClickListener(new OnClickListener() {
-     		
-     			@Override
-     			public void onClick(View v) {
-     				// TODO Auto-generated method stub
-     				// 버튼 클릭 할 때 소프트 키보드가 없어지게..
-     				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-     				inputManager.hideSoftInputFromWindow(txtViewStationName
-     						.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-     		
-     				// AutoCompleteTextView에서 역명 가져오기.
-     				String strStationName = txtViewStationName.getText().toString()
-     						.trim();
-     				SearchButton(strStationName);
-     			}
-     		});
-        
         registerForContextMenu(getListView()); // 컨텍스트 메뉴 등록
     }
     
