@@ -26,9 +26,10 @@ public final class R {
         public static final int quit=0x7f020007;
         public static final int refresh=0x7f020008;
         public static final int subway=0x7f020009;
+        public static final int teamlogo=0x7f02000a;
     }
     public static final class id {
-        public static final int TextAddress=0x7f07001c;
+        public static final int TextAddress=0x7f07001d;
         public static final int TextBack1=0x7f07000d;
         public static final int TextBack2=0x7f07000f;
         public static final int TextBackSchedule=0x7f070007;
@@ -46,18 +47,19 @@ public final class R {
         public static final int TextNextStation=0x7f070001;
         public static final int TextPreStation=0x7f070000;
         public static final int TextStationName=0x7f070002;
-        public static final int TextTel=0x7f07001d;
+        public static final int TextTel=0x7f07001e;
         public static final int bottomtext=0x7f070018;
         public static final int btnSearch=0x7f070017;
-        public static final int exit=0x7f07001e;
+        public static final int exit=0x7f07001f;
         public static final int firstlasttime=0x7f070011;
         public static final int firstlasttimedetail=0x7f070012;
         public static final int firstlasttimedetail1=0x7f070013;
         public static final int firstlasttimedetail2=0x7f070014;
+        public static final int imageView1=0x7f07001a;
         public static final int linearLayout=0x7f070015;
-        public static final int refrash=0x7f07001f;
-        public static final int stationinfotable=0x7f07001b;
-        public static final int stationinfotextview=0x7f07001a;
+        public static final int refrash=0x7f070020;
+        public static final int stationinfotable=0x7f07001c;
+        public static final int stationinfotextview=0x7f07001b;
         public static final int toptext=0x7f070019;
         public static final int txtViewStationName=0x7f070016;
     }
@@ -65,7 +67,8 @@ public final class R {
         public static final int arrivalinfo=0x7f030000;
         public static final int main=0x7f030001;
         public static final int row=0x7f030002;
-        public static final int stationinfo=0x7f030003;
+        public static final int start_activity=0x7f030003;
+        public static final int stationinfo=0x7f030004;
     }
     public static final class menu {
         public static final int menu_main=0x7f060000;

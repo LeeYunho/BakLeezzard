@@ -193,9 +193,6 @@ public class SubwayInfo extends ListActivity implements Runnable {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        startActivity(new Intent(this, Start_Activity.class));
-        
         btnSearch = (Button) this.findViewById(R.id.btnSearch);
 		
         
