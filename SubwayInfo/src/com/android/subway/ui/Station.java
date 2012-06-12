@@ -31,11 +31,7 @@ public class Station extends TabActivity {
 		
 		tabHost.addTab(tabHost.newTabSpec("Arrival")
 				.setIndicator("열차 도착 정보", getResources().getDrawable(R.drawable.subway))
-				.setContent(StationInfoIntent));
-		
-		tabHost.addTab(tabHost.newTabSpec("Timetable")
-				.setIndicator("시간표", getResources().getDrawable(R.drawable.exit))
-				.setContent(new Intent(Station.this, Tab2_TimetableInfo.class)));
+				.setContent(StationInfoIntent));		
 		
 		tabHost.addTab(tabHost.newTabSpec("StationInfo")
 				.setIndicator("역정보", getResources().getDrawable(R.drawable.info))
