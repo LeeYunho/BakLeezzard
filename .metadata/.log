@@ -5515,3 +5515,39 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY org.eclipse.ui 4 4 2012-06-13 00:25:45.840
 !MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-06-13 00:33:50.658 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-06-13 01:07:25.148
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-06-13 05:10:40.428 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-06-13 06:27:24.634
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-06-13 07:07:47.455 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-06-13 08:34:53.925
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-06-13 08:36:57.104 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_31
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-06-13 10:15:33.639
+!MESSAGE Invalid preference page path: XML Syntax
